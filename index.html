@@ -1,74 +1,81 @@
 <!DOCTYPE html>
-<html lang="uk" data-theme="dark">
-
+<html lang="uk">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YUBIM - Твій BIM Ментор</title>
-  
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+  <title>YUBIM - Проєктуй ефективніше</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-  <header class="container">
-    <nav>
-      <ul>
-        <li><strong>YUBIM</strong></li>
-      </ul>
-      <ul>
-        <li><a href="#about">Про мене</a></li>
-        <li><a href="#courses">Курси</a></li>
-        <li><a href="#plugins">Плагіни</a></li>
-      </ul>
-    </nav>
-    <div style="text-align: center; padding: 4rem 0;">
-      <h1 style="font-size: 3rem;">Проєктуй ефективніше з YUBIM</h1>
-      <p>Твій персональний гід у світі BIM-технологій: від Revit до Tekla.</p>
-      <a href="https://www.youtube.com/@ТВІЙКАНАЛ" role="button" target="_blank">Перейти на YouTube</a>
+  <div class="background-gradient"></div>
+
+  <header>
+    <div class="container">
+      <a href="/" class="brand-logo">YUBIM</a>
+      <nav class="nav-links">
+        <a href="/#about">Про мене</a>
+        <a href="courses.html">Курси</a>
+        <a href="plugins.html">Плагіни</a>
+      </nav>
+      <a href="https://www.youtube.com/" target="_blank" class="button">YouTube</a>
     </div>
   </header>
 
-  <main class="container">
-
-    <section id="about" style="margin-bottom: 5rem;">
-      <h2>Хто я?</h2>
-      <p>Привіт! Я студент-магістр ХНУМГ та бакалавр Університету Глазго. Моя мета — ділитися практичними знаннями з цивільної інженерії та BIM-моделювання, яких часто не вистачає в університетській програмі. Я маю глибокий досвід роботи в Revit і створюю інструменти для автоматизації роботи інженерів.</p>
-    </section>
-
-    <section id="courses" style="margin-bottom: 5rem;">
-      <h2>Мої навчальні курси</h2>
-      <div class="grid">
-        <article>
-          <h4 style="margin-bottom: 0.5rem;">Армування в Revit</h4>
-          <p>Поглиблений курс з армування залізобетонних конструкцій для професіоналів. 5 практичних занять.</p>
-          <a href="#">Дізнатись більше</a>
-        </article>
-        <article>
-          <h4 style="margin-bottom: 0.5rem;">Revit для початківців</h4>
-          <p>Базовий курс для студентів, що допоможе швидко опанувати основи проєктування в Revit.</p>
-          <a href="#">Дізнатись більше</a>
-        </article>
+  <main>
+    <section class="section hero-section">
+      <div class="container">
+        <h1>Проєктуй ефективніше.<br>Втілюй швидше.</h1>
+        <p class="subtitle">Твій персональний гід у світі BIM-технологій: від Revit до Tekla. Практичні курси та інструменти для сучасних інженерів.</p>
+        <a href="courses.html" class="button">Переглянути курси</a>
+        
+        <canvas id="canvas3d"></canvas>
       </div>
     </section>
 
-    <section id="plugins" style="margin-bottom: 5rem;">
-      <h2>Мої інструменти</h2>
-      <p>Я розробляю плагіни для Revit та Tekla, щоб прискорити рутинні задачі та звільнити час для справжньої інженерії.</p>
-      <a href="#" role="button" class="secondary">Переглянути розробки</a>
+    <section id="about" class="section">
+      <div class="container">
+        <h2>Хто я?</h2>
+        <p class="subtitle">Привіт! Я студент-магістр ХНУМГ та бакалавр Університету Глазго. Моя мета — ділитися практичними знаннями з цивільної інженерії та BIM, яких часто не вистачає в університетській програмі.</p>
+      </div>
     </section>
 
+    <section id="courses" class="section">
+      <div class="container">
+        <h2>Мої навчальні курси</h2>
+        <p class="subtitle">Відкрий для себе шлях до досконалості в BIM-моделюванні з моїми структурованими курсами.</p>
+        <div class="cards-grid">
+          <article class="card">
+            <h4>Армування в Revit</h4>
+            <p>Поглиблений курс для професіоналів, що охоплює всі аспекти армування залізобетонних конструкцій.</p>
+            <a href="courses.html#revit-reinforcement" class="button secondary">Детальніше</a>
+          </article>
+          <article class="card">
+            <h4>Revit для початківців</h4>
+            <p>Базовий курс для студентів, що допоможе швидко та впевнено опанувати основи проєктування.</p>
+            <a href="courses.html#revit-beginners" class="button secondary">Детальніше</a>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="container" style="text-align: center; padding: 2rem 0;">
-    <small>
-      &copy; 2025 YUBIM. Всі права захищено.
-      <br>
-      <a href="#">LinkedIn</a> &bull; <a href="#">GitHub</a>
-    </small>
+  <footer>
+    <div class="container footer-content">
+      <p>&copy; 2025 YUBIM. Всі права захищено.</p>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+        <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+      </div>
+    </div>
   </footer>
+
+  <script type="module" src="js/main.js"></script>
 
 </body>
 </html>
