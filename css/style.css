@@ -1,0 +1,12 @@
+/* Змінюємо основний колір акцентів на більш унікальний */
+:root {
+  --pico-primary: #00aaff; /* Яскравий синій колір */
+  --pico-primary-hover: #0088cc;
+  --pico-primary-focus: rgba(0, 170, 255, 0.25);
+  --pico-primary-inverse: #FFF;
+}
+
+/* Зробимо заголовок трохи більшим */
+h1 {
+    font-size: 3.2rem;
+}
