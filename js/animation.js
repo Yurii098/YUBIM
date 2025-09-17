@@ -11,9 +11,12 @@ if (canvasContainer) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     canvasContainer.appendChild(renderer.domElement);
     
+    const lightThemeColor = 0x005ae0;
+    const darkThemeColor = 0x0066ff;
+
     const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
     const material = new THREE.MeshStandardMaterial({
-        color: 0x0066ff,
+        color: document.body.classList.contains('dark-theme') ? darkThemeColor : lightThemeColor,
         wireframe: true,
         roughness: 0.1,
         metalness: 0.5
@@ -21,6 +24,11 @@ if (canvasContainer) {
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
     
+    window.addEventListener('themeChanged', (event) => {
+        const newColor = event.detail.theme === 'dark' ? darkThemeColor : lightThemeColor;
+        material.color.set(newColor);
+    });
+
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -30,11 +38,7 @@ if (canvasContainer) {
     let isMouseDown = false;
     let previousMousePosition = { x: 0, y: 0 };
     
-    const onMouseDown = (e) => {
-        isMouseDown = true;
-        previousMousePosition.x = e.clientX;
-        previousMousePosition.y = e.clientY;
-    };
+    const onMouseDown = (e) => { isMouseDown = true; previousMousePosition.x = e.clientX; previousMousePosition.y = e.clientY; };
     const onMouseUp = () => isMouseDown = false;
     const onMouseMove = (e) => {
         if (!isMouseDown) return;
@@ -52,10 +56,7 @@ if (canvasContainer) {
 
     const animate = () => {
         requestAnimationFrame(animate);
-        if (!isMouseDown) {
-            cube.rotation.x += 0.001;
-            cube.rotation.y += 0.001;
-        }
+        if (!isMouseDown) { cube.rotation.x += 0.001; cube.rotation.y += 0.001; }
         renderer.render(scene, camera);
     };
     animate();
