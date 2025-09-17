@@ -1,81 +1,80 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YUBIM - Проєктуй ефективніше</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang="meta_title_main">YUBIM - Інженерія майбутнього</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-  <div class="background-gradient"></div>
-
-  <header>
-    <div class="container">
-      <a href="/" class="brand-logo">YUBIM</a>
-      <nav class="nav-links">
-        <a href="/#about">Про мене</a>
-        <a href="courses.html">Курси</a>
-        <a href="plugins.html">Плагіни</a>
-      </nav>
-      <a href="https://www.youtube.com/" target="_blank" class="button">YouTube</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="section hero-section">
-      <div class="container">
-        <h1>Проєктуй ефективніше.<br>Втілюй швидше.</h1>
-        <p class="subtitle">Твій персональний гід у світі BIM-технологій: від Revit до Tekla. Практичні курси та інструменти для сучасних інженерів.</p>
-        <a href="courses.html" class="button">Переглянути курси</a>
-        
-        <canvas id="canvas3d"></canvas>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="container">
-        <h2>Хто я?</h2>
-        <p class="subtitle">Привіт! Я студент-магістр ХНУМГ та бакалавр Університету Глазго. Моя мета — ділитися практичними знаннями з цивільної інженерії та BIM, яких часто не вистачає в університетській програмі.</p>
-      </div>
-    </section>
-
-    <section id="courses" class="section">
-      <div class="container">
-        <h2>Мої навчальні курси</h2>
-        <p class="subtitle">Відкрий для себе шлях до досконалості в BIM-моделюванні з моїми структурованими курсами.</p>
-        <div class="cards-grid">
-          <article class="card">
-            <h4>Армування в Revit</h4>
-            <p>Поглиблений курс для професіоналів, що охоплює всі аспекти армування залізобетонних конструкцій.</p>
-            <a href="courses.html#revit-reinforcement" class="button secondary">Детальніше</a>
-          </article>
-          <article class="card">
-            <h4>Revit для початківців</h4>
-            <p>Базовий курс для студентів, що допоможе швидко та впевнено опанувати основи проєктування.</p>
-            <a href="courses.html#revit-beginners" class="button secondary">Детальніше</a>
-          </article>
+    <div class="background-aurora"></div>
+    <header>
+        <div class="header-content">
+            <a href="/" class="brand-logo">YUBIM</a>
+            <nav class="nav-links">
+                <a href="/#about" data-lang="nav_about">Про автора</a>
+                <a href="/#courses-preview" data-lang="nav_courses">Курси</a>
+            </nav>
+            <div class="header-controls">
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang-set="uk">UA</button>
+                    <button class="lang-btn" data-lang-set="en">EN</button>
+                </div>
+                <a href="/#courses-preview" class="button" data-lang="btn_get_started">Почати навчання</a>
+            </div>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
+    </header>
+    <main>
+        <section class="section hero-section">
+            <div class="container hero-container">
+                <h1 data-lang="hero_h1">Інженерія майбутнього.<br>Ваші проєкти на новому рівні.</h1>
+                <p class="subtitle" data-lang="hero_subtitle">Глибоке занурення у BIM-технології. Авторські курси та рішення для фахівців, що прагнуть досконалості.</p>
+                <div id="canvas-container"></div>
+            </div>
+        </section>
+        <section id="about" class="section">
+            <div class="container">
+                <h2 data-lang="about_h2">Місія та експертиза</h2>
+                <p class="subtitle" data-lang="about_subtitle">Моя мета — надати інженерам передові знання та інструменти для реалізації найамбітніших проєктів. Поєднуючи академічну базу Університету Глазго та практичний досвід, я створюю навчальні програми, що закривають прогалини класичної освіти.</p>
+            </div>
+        </section>
+        <section id="courses-preview" class="section">
+            <div class="container">
+                <h2 data-lang="courses_h2">Флагманські курси</h2>
+                <p class="subtitle" data-lang="courses_subtitle">Структуровані програми для системного освоєння ключових навичок у BIM.</p>
+                <div class="cards-grid">
+                    <article class="card">
+                        <h4 data-lang="card1_h4">Revit: Професійне армування</h4>
+                        <p data-lang="card1_p">Комплексний курс для досвідчених інженерів, що систематизує підходи до армування ЗБ конструкцій.</p>
+                        <a href="revit-reinforcement.html" class="button secondary" data-lang="card_btn">Переглянути програму</a>
+                    </article>
+                    <article class="card">
+                        <h4 data-lang="card2_h4">Revit: Архітектура з нуля</h4>
+                        <p data-lang="card2_p">Фундаментальний курс, що закладає міцну основу для впевненої роботи в Revit для початківців.</p>
+                        <a href="revit-beginners.html" class="button secondary" data-lang="card_btn">Переглянути програму</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
     <div class="container footer-content">
-      <p>&copy; 2025 YUBIM. Всі права захищено.</p>
-      <div class="social-links">
-        <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
-        <a href="https://www.instagram.com/" target="_blank">Instagram</a>
-      </div>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+            <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+        </div>
+        <p>&copy; 2025 YUBIM. <span data-lang="footer_rights">Всі права захищено.</span></p>
     </div>
-  </footer>
+</footer>
+    <script src="js/main.js"></script>
 
-  <script type="module" src="js/main.js"></script>
-
+    <script async src="https://unpkg.com/es-module-shims@1.10.0/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.165.0/build/three.module.js" } }
+    </script>
+    <script type="module" src="js/animation.js"></script>
 </body>
 </html>

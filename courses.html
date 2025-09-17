@@ -3,58 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Курси - YUBIM</title>
+    <title data-lang="page_courses_title">Курси - YUBIM</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="background-gradient"></div>
+    <div class="background-aurora"></div>
     <header>
-        <div class="container">
-            <a href="/" class="brand-logo">YUBIM</a>
-            <nav class="nav-links">
-                <a href="/#about">Про мене</a>
-                <a href="courses.html">Курси</a>
-                <a href="plugins.html">Плагіни</a>
-            </nav>
-            <a href="https://www.youtube.com/" target="_blank" class="button">YouTube</a>
+    <div class="header-content">
+        <a href="/" class="brand-logo">YUBIM</a>
+        <nav class="nav-links">
+            <a href="/#about" data-lang="nav_about">Про автора</a>
+            <a href="courses.html" data-lang="nav_courses">Курси</a>
+        </nav>
+        <div class="header-controls">
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang-set="uk">UA</button>
+                <button class="lang-btn" data-lang-set="en">EN</button>
+            </div>
+            <a href="courses.html" class="button" data-lang="btn_get_started">Почати навчання</a>
         </div>
-    </header>
+    </div>
+</header>
 
     <main>
         <section class="section page-header">
-            <h1>Навчальні Курси</h1>
-            <p class="subtitle">Структуровані відео-уроки для різних рівнів підготовки.</p>
+            <h1 data-lang="courses_h2">Навчальні Курси</h1>
+            <p class="subtitle" data-lang="courses_subtitle">Відкрий для себе шлях до досконалості в BIM-моделюванні з моїми структурованими курсами.</p>
         </section>
 
         <section class="section">
             <div class="container">
-                <div id="revit-reinforcement" class="course-item">
-                    <h3>Армування в Revit: Для Професіоналів</h3>
-                    <p>Поглиблений курс для інженерів, які бажають досконало опанувати всі аспекти армування у Revit.</p>
-                    <div class="lesson-list">
-                        <h4>Урок 1: Вступ та налаштування</h4>
-                        <iframe src="https://www.youtube.com/embed/ТУТ_ID_ВІДЕО" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
+                <div class="cards-grid">
+                    <article class="card">
+                        <h4 data-lang="card1_h4">Армування в Revit</h4>
+                        <p data-lang="card1_p">Поглиблений курс для професіоналів, що охоплює всі аспекти армування залізобетонних конструкцій.</p>
+                        <a href="revit-reinforcement.html" class="button secondary" data-lang="card_btn">Детальніше</a>
+                    </article>
+                    <article class="card">
+                        <h4 data-lang="card2_h4">Revit для початківців</h4>
+                        <p data-lang="card2_p">Базовий курс для студентів, що допоможе швидко та впевнено опанувати основи проєктування.</p>
+                        <a href="revit-beginners.html" class="button secondary" data-lang="card_btn">Детальніше</a>
+                    </article>
                 </div>
-                <div id="revit-beginners" class="course-item">
-                    <h3>Revit для Початківців</h3>
-                    <p>Курс для студентів та новачків, що допоможе освоїти базові інструменти Revit.</p>
-                    </div>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container footer-content">
-            <p>&copy; 2025 YUBIM. Всі права захищено.</p>
+            <p>&copy; 2025 YUBIM. <span data-lang="footer_rights">Всі права захищено.</span></p>
             <div class="social-links">
                 <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
                 <a href="https://www.instagram.com/" target="_blank">Instagram</a>
             </div>
         </div>
     </footer>
+
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
