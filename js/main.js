@@ -1,6 +1,29 @@
 // js/main.js
 
 document.addEventListener('DOMContentLoaded', () => {
+
+
+
+    // --- ЛОГІКА ДИНАМІЧНОГО ХЕДЕРА ---
+    const header = document.querySelector('header');
+    
+    // Перевіряємо, чи хедер взагалі є на сторінці
+    if (header) {
+        const handleScroll = () => {
+            // Якщо користувач проскролив більше 10px вниз
+            if (window.scrollY > 10) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        };
+
+        // Викликаємо функцію кожен раз, коли користувач скролить
+        window.addEventListener('scroll', handleScroll);
+        // А також викликаємо її один раз при завантаженні сторінки
+        handleScroll();
+    }
+    
     // --- ЛОГІКА ПЕРЕМИКАННЯ ТЕМИ ---
     const themeSwitcher = document.querySelector('.theme-switcher');
     

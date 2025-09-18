@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.134/examples/js/controls/OrbitControls.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-lang="meta_title_main">YUBIM - Інженерія майбутнього</title>
@@ -8,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -37,13 +41,27 @@
     </div>
 </header>
     <main>
-        <section class="section hero-section">
-            <div class="container hero-container">
-                <h1 data-lang="hero_h1">Інженерія майбутнього.<br>Ваші проєкти на новому рівні.</h1>
-                <p class="subtitle" data-lang="hero_subtitle">Глибоке занурення у BIM-технології. Авторські курси та рішення для фахівців, що прагнуть досконалості.</p>
-                <div id="canvas-container"></div>
-            </div>
-        </section>
+        
+       <section class="section hero-section">
+  <div id="scene-container"></div>
+
+    <div class="container hero-container">
+
+<div class="glass-frame-bg"></div>
+
+        <div class="hero-text">
+            <h1 data-lang="hero_h1">Інженерія майбутнього.<br>Ваші проєкти на новому рівні.</h1>
+            <p class="subtitle" data-lang="hero_subtitle">Глибоке занурення у BIM-технології. Авторські курси та рішення для фахівців, що прагнуть досконалості.</p>
+        </div>
+    </div>
+        
+        <div class="hero-image-container">
+            <img src="images/main_thing.png" alt="Hero Image">
+            <p class="image-caption">Lone Parent Families Centre. Yurii Kuzub - 2025</p>
+        </div>
+
+    
+</section>
         <section id="about" class="section">
             <div class="container">
                 <h2 data-lang="about_h2">Місія та експертиза</h2>

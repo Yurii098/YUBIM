@@ -1,16 +1,29 @@
 /* --- Змінні та базові налаштування --- */
 :root {
+    /* Нові кольори бренду */
+    --brand-blue: #008ac5;
+    --brand-pink: #ffffff;
+    /* Затемнений рожевий для кращої читабельності на світлому фоні */
+    --brand-pink-text:#5f5f5f; 
+    --brand-blue-hover: #00a2e0; 
+
     /* Світла тема (за замовчуванням) */
     --color-accent: #005ae0;
     --color-accent-hover: #004ab3;
     --color-bg: #F4F4F9;
     --color-text-primary: #1d1d1f;
     --color-text-secondary: #5a6a7c;
-    --color-glass-bg: rgba(255, 255, 255, 0.5);
-    --color-glass-border: rgba(0, 0, 0, 0.08);
-    --aurora-opacity: 0.7; /* <-- Збільшено насиченість */
-    --aurora-gradient: radial-gradient(circle at 20% 80%, #a7c7e7 0%, transparent 25%),
-                       radial-gradient(circle at 80% 30%, #b0d8ff 0%, transparent 25%); /* <-- Новий голубий градієнт */
+    /* Новий фон скла з легким градієнтом */
+    --color-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+    /* Світла рамка, що імітує відблиск */
+    --color-glass-border: rgba(255, 255, 255, 0.4);
+/* Збільшуємо непрозорість для світлої теми */
+    --aurora-opacity: 0.9; /* Було 0.7 */
+    
+    /* Можна також зробити кольори всередині градієнта менш прозорими,
+       змінивши останнє значення в rgba(), наприклад, з 0.7 на 0.9 */
+    --aurora-gradient: radial-gradient(circle at 20% 80%, rgba(29, 187, 255, 0.8) 0%, transparent 25%),
+                       radial-gradient(circle at 80% 30%,  rgba(29, 187, 255, 0.8) 0%, transparent 25%);
 }
 
 body.dark-theme {
@@ -20,11 +33,112 @@ body.dark-theme {
     --color-bg: #0A0A0C;
     --color-text-primary: #f5f5f7;
     --color-text-secondary: #8a8a8e;
-    --color-glass-bg: rgba(22, 23, 28, 0.5);
-    --color-glass-border: rgba(255, 255, 255, 0.08);
-    --aurora-opacity: 0.5;
-    --aurora-gradient: radial-gradient(circle at 20% 30%, #002275 0%, transparent 25%),
-                       radial-gradient(circle at 80% 70%, #001f5c 0%, transparent 25%);
+--color-glass-bg: linear-gradient(135deg, rgba(35, 36, 41, 0.6), rgba(35, 36, 41, 0.3));
+    --color-glass-border: rgba(255, 255, 255, 0.15);
+
+    /* Збільшуємо непрозорість для темної теми */
+    --aurora-opacity: 0.7; /* Було 0.5 */
+    /* Оновлений градієнт для темної теми */
+    --aurora-gradient: radial-gradient(circle at 20% 30%, rgba(29, 187, 255, 0.5) 0%, transparent 25%),
+                       radial-gradient(circle at 80% 70%,  rgba(29, 187, 255, 0.8) 0%, transparent 25%);
+}
+
+/* Застосовуємо нові кольори та стилі до тексту */
+.hero-text h1 {
+    color: var(--brand-blue);
+    font-family: 'Manrope', sans-serif; /* <-- Новий шрифт */
+    font-weight: 1000;                   /* <-- Жирне накреслення */
+    text-transform: uppercase;          /* <-- ВЕЛИКІ ЛІТЕРИ */
+    letter-spacing: 1.5px;              /* <-- Трохи збільшимо відстань між літерами */
+}
+
+.hero-text {
+    /* Встановлюємо максимальну ширину, наприклад, 45% або 500px */
+    max-width: 60%; 
+    
+    /* Це потрібно, щоб текст не виходив за межі, якщо ви робите вікно дуже вузьким */
+    position: relative; 
+    z-index: 2; /* Робимо текст на один шар вище, про всяк випадок */
+    left: -200px; /* <-- Змінюйте це значення */
+}
+
+.hero-text .subtitle {
+    /* Використовуємо затемнений рожевий для читабельності */
+    color: var(--brand-pink-text); 
+     font-family: 'Manrope', sans-serif; /* <-- Новий шрифт */
+    text-transform: uppercase; /* <-- Робить текст ВЕЛИКИМИ ЛІТЕРАМИ */
+    font-weight: 600;          /* <-- Робить шрифт товщим (напівжирним) */
+    letter-spacing: 1px;       /* <-- Додамо трохи простору між літерами */
+}
+
+/* Для темної теми можна використовувати яскравий рожевий, бо контраст достатній */
+.dark-theme .hero-text .subtitle {
+    color: var(--brand-pink);
+}
+
+.hero-container {
+     /* Додаємо це, щоб він став точкою відліку для зображення */
+    position: relative; 
+    
+    /* Встановлюємо мінімальну висоту, щоб контейнер не "схлопнувся" */
+    min-height: 70vh; 
+    display: flex; /* Використаємо flex, щоб вирівняти текстовий блок */
+    align-items: center;
+}
+
+/* Вирівнюємо текст всередині нашого блоку по лівому краю */
+.hero-text h1,
+.hero-text .subtitle {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+    .hero-container {
+        /* На малих екранах робимо одну колонку */
+        grid-template-columns: 1fr;
+    }
+
+    .hero-text h1,
+    .hero-text .subtitle {
+        /* І повертаємо тексту центрування для кращого вигляду */
+        text-align: center;
+    }
+}
+
+.hero-image-container {
+    position: absolute; /* <-- Найголовніша зміна! */
+    
+    /* Прив'язуємо блок до правого краю */
+    right: 100px; 
+    
+    /* Центруємо вертикально */
+    top: 45%;
+    transform: translateY(-50%);
+
+    /* Задаємо ширину блоку, наприклад, 50% від ширини батьківського контейнера */
+    width: 50%; 
+    height: 100%;
+
+    /* Це знову для центрування самого <img> всередині */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.hero-image-container img {
+    /* --- ОСНОВНИЙ КОНТРОЛЬ РОЗМІРУ --- */
+    /* Тепер це значення буде працювати без жодних обмежень */
+    width: 1000px; 
+    
+    /* --- ВИДАЛІТЬ АБО ЗАКОМЕНТУЙТЕ ЦЕЙ РЯДОК --- */
+    /* max-width: 100%; */ 
+    
+    height: auto; /* Зберігає пропорції зображення */
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -42,7 +156,9 @@ body {
     transform: translate(-50%, -50%);
     width: 150vw; height: 150vh;
     background: var(--aurora-gradient);
-    filter: blur(130px); z-index: -1;
+    /* Зменшуємо розмиття, щоб зробити плями кольору чіткішими */
+    filter: blur(100px); /* Було 130px */
+    z-index: -1;
     animation: aurora-flow 25s infinite alternate; 
     opacity: var(--aurora-opacity);
     transition: background 0.5s ease, opacity 0.5s ease;
@@ -52,16 +168,65 @@ body {
     to { transform: translate(-50%, -50%) rotate(360deg) scale(1.3); }
 }
 header {
-    position: sticky; top: 1rem; z-index: 1000;
-    width: calc(100% - 2rem); max-width: 1100px;
-    margin: 1rem auto 0 auto;
+    position: sticky;
+    z-index: 1000;
+    padding: 0.8rem 1.5rem;
+    
+    /* --- Початковий стан (наверху сторінки) --- */
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 0;
+    background-color: transparent;
+    backdrop-filter: blur(0px); /* Починаємо без розмиття */
+    border-bottom: 1px solid transparent; /* Прозорий бордер, щоб уникнути "стрибка" висоти */
+
+    /* --- ВЛАСТИВІСТЬ АНІМАЦІЇ --- */
+    /* Анімуємо всі зміни протягом 0.4 секунди */
+    transition: all 0.4s ease-in-out;
+}
+
+header.header-scrolled {
+    /* --- Стан при скролі --- */
+    top: 1rem;
+    width: calc(100% - 2rem);
+    max-width: 1100px;
+    border-radius: 12px;
     background-color: var(--color-glass-bg);
     backdrop-filter: blur(16px);
     border: 1px solid var(--color-glass-border);
-    border-radius: 12px;
-    padding: 0.8rem 1.5rem;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    border-bottom: 1px solid var(--color-glass-border);
+    /* Додамо тінь для ефекту "польоту" */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
 }
+
+.dark-theme header.header-scrolled {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Замість старого .header-content вставте це --- */
+
+/* 1. Стиль за замовчуванням (розтягнутий контент) */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 100%; /* Займає всю доступну ширину */
+    margin: 0 auto;
+    /* Додаємо бокові відступи, щоб контент не прилипав до країв екрану */
+    padding: 0 1.5rem; 
+    /* Плавна анімація для max-width та padding */
+    transition: max-width 0.4s ease-in-out, padding 0.4s ease-in-out;
+}
+
+/* 2. Стиль для стану при скролі (компактний контент) */
+header.header-scrolled .header-content {
+    max-width: 1100px; /* Обмежуємо ширину, як було раніше */
+    padding: 0; /* Прибираємо відступи, бо вони вже є у батьківського хедера */
+}
+
 .header-content { display: flex; justify-content: space-between; align-items: center; }
 .brand-logo { font-weight: 700; font-size: 1.5rem; color: var(--color-text-primary); text-decoration: none; }
 .nav-links { display: flex; align-items: center; gap: 2rem; }
@@ -97,11 +262,18 @@ body:not(.dark-theme) .theme-switcher .sun { display: none; }
 
 .lang-switcher { display: flex; background-color: rgba(0, 0, 0, 0.05); border-radius: 8px; padding: 4px; }
 .dark-theme .lang-switcher { background-color: rgba(30, 30, 32, 0.7); }
-.lang-btn { border: none; background: transparent; color: var(--color-text-secondary); padding: 0.3rem 0.7rem; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
+.lang-btn { border: none; background: transparent; color: var(--color-text-secondary); 
+    padding: 0.3rem 0.7rem; 
+    border-radius: 6px; cursor: pointer; 
+    font-weight: 600; transition: all 0.3s ease; }
 .lang-btn.active { background-color: #fff; color: var(--color-text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 .dark-theme .lang-btn.active { background-color: var(--color-bg); }
 
-.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+.container {
+    max-width: 1100px; /* <--- Збільшуємо загальну ширину */
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
 .section { padding: 4rem 0; }
 #about { padding-top: 2rem; }
 h1, h2, h3, h4 { font-weight: 700; text-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); color: var(--color-text-primary); }
@@ -112,14 +284,82 @@ h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; text-align: center;
 .hero-container { position: relative; }
 #canvas-container { width: 100%; max-width: 500px; height: 350px; margin: 2rem auto 0 auto; cursor: grab; }
 #canvas-container:active { cursor: grabbing; }
-.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; text-align: left; }
-.card { background: var(--color-glass-bg); border: 1px solid var(--color-glass-border); border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(12px); transition: all 0.3s ease; }
-.card:hover { background: rgba(255, 255, 255, 0.8); border-color: rgba(0, 0, 0, 0.15); transform: translateY(-8px); }
-.dark-theme .card:hover { background: rgba(30, 30, 32, 0.8); border-color: rgba(255, 255, 255, 0.15); }
-.card h4 { font-size: 1.5rem; margin-bottom: 0.75rem; }
-.card p { color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1.5rem; }
-.button { display: inline-block; background-color: var(--color-accent); color: #fff !important; padding: 0.8rem 1.8rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.2s ease; border: 1px solid transparent; cursor: pointer; }
-.button:hover { background-color: var(--color-accent-hover); transform: translateY(-2px); }
+
+.cards-grid { 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 2rem; 
+    margin-top: 4rem; 
+    text-align: left; 
+}
+
+.card { 
+    /* Використовуємо більш прозорий фон */
+    background: rgba(255, 255, 255, 0.15); 
+    border: 1px solid var(--color-glass-border); 
+    border-radius: 16px; 
+    padding: 2.5rem; 
+    /* Значно зменшуємо розмиття */
+    backdrop-filter: blur(5px); 
+    transition: all 0.3s ease;
+    text-align: left;
+    /* Додаємо тінь для об'єму, як у рамки */
+    box-shadow: inset 0 2px 2px 0 rgba(255, 255, 255, 0.2), 
+                inset 0 -2px 5px 0 rgba(0, 0, 0, 0.15);
+}
+
+.card:hover { 
+    /* Робимо фон трохи менш прозорим */
+    background: rgba(255, 255, 255, 0.25); 
+    border-color: rgba(255, 255, 255, 0.4); 
+    transform: translateY(-8px); 
+}
+
+/* 3. Окремий фон для темної теми */
+.dark-theme .card {
+    background: rgba(30, 30, 32, 0.2);
+}
+
+/* 4. Стиль при наведенні для темної теми */
+.dark-theme .card:hover { 
+    background: rgba(30, 30, 32, 0.3); 
+    border-color: rgba(255, 255, 255, 0.15); 
+}
+
+.card h4 { 
+    font-size: 1.5rem; 
+    margin-bottom: 0.75rem;
+ }
+.card p { 
+    color: var(--color-text-secondary); 
+    line-height: 1.6; 
+    margin-bottom: 1.5rem; 
+}
+
+.button {
+    display: inline-block;
+    /* Використовуємо новий фірмовий колір */
+    background-color: var(--brand-blue);
+    color: #fff !important;
+    padding: 0.8rem 1.8rem;
+    /* Робимо кути максимально заокругленими */
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer;
+    /* Додамо тінь для кращого візуального ефекту */
+    box-shadow: 0 4px 15px rgba(29, 187, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    /* Використовуємо новий колір для наведення */
+    background-color: var(--brand-blue-hover);
+    /* Ефект "підняття" кнопки */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(29, 187, 255, 0.4);
+}
+
 .button.secondary { background-color: var(--color-glass-bg); color: var(--color-text-primary) !important; border: 1px solid var(--color-glass-border); }
 .button.secondary:hover { background-color: rgba(0,0,0,0.05); }
 .dark-theme .button.secondary:hover { background-color: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); }
@@ -138,4 +378,136 @@ footer { padding: 3rem 0; border-top: 1px solid var(--color-glass-border); backg
     header { padding: 0.8rem 1rem; }
     .hero-section { padding-top: 15vh; }
     #about { padding-top: 0; }
+.hero-image-container img {
+        width: 350px; /* Робимо зображення трохи меншим на телефонах */
+        margin-top: 2rem; /* Додаємо відступ зверху, щоб відокремити від тексту */
+    }
+}
+
+
+.image-caption {
+    position: absolute; /* <-- Це дозволяє нам вільно рухати текст */
+    z-index: 5;         /* <-- Гарантує, що текст буде поверх зображення */
+
+    /* --- ОСНОВНИЙ КОНТРОЛЬ ПОЗИЦІЇ --- */
+    /* Змінюйте ці значення, щоб рухати підпис */
+    bottom: 230px; /* Відстань від нижнього краю контейнера зображення */
+    left: 600px;   /* Відстань від лівого краю контейнера зображення */
+    
+    /* --- Стилізація тексту --- */
+    font-size: 14px;
+    font-style: italic; /* Курсивний шрифт */
+    
+    /* --- Адаптація під теми --- */
+    /* Використовуємо змінну, яка автоматично змінює колір для світлої/темної теми */
+    color: var(--color-text-secondary);
+    opacity: 0.8; /* Робимо трохи прозорим, щоб не кидався в очі */
+
+    /* Додатково, щоб текст не "прилипав" до країв, якщо він довгий */
+    max-width: 900px; 
+}
+
+
+
+
+
+/* --- СТИЛІ ДЛЯ 3D-ФОНУ --- */
+.hero-section {
+    /* Створюємо контекст для позиціонування фону */
+    position: relative;
+    /* Важливо: прибираємо overflow, щоб сцена не виходила за межі секції */
+    overflow: hidden;
+    min-height: 100vh; /* Give more space for the scene */
+}
+
+#scene-container {
+  position: absolute; /* Позиціонуємо відносно .hero-section */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75vh;       /* <-- Ось наша нова висота ТІЛЬКИ для сцени! */
+  z-index: 1;         /* Розміщуємо за контентом */
+  overflow: hidden;   /* <-- Ключова властивість! Обрізає сцену. */
+  
+/* --- ДОДАЙТЕ ЦІ ДВА РЯДКИ --- */
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 50%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 50%, transparent 100%);
+}
+
+#hero-canvas-background {
+    position: absolute;
+    /* Робимо полотно набагато більшим за екран */
+    width: 150vw;
+    height: 150vh;
+    /* Центруємо його */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    
+pointer-events: auto; /* Allows drag interactions */
+
+    /* Магія тут: застосовуємо маску, яка робить краї прозорими */
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 60%, transparent 100%);
+    /* Для сумісності з Safari/Webkit */
+    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 60%, transparent 100%);
+}
+
+.hero-container {
+    /* Піднімаємо контент вище фону */
+    position: relative;
+    z-index: 2;
+}
+
+
+.glass-frame-bg {
+  /* --- ⚙️ КЕРУЙТЕ РАМКОЮ ЗВІДСИ --- */
+  --frame-width: 630px;
+  --frame-height: 390px;
+  --frame-top: 38%; /* Позиція по вертикалі */
+  --frame-left: 11%;  /* Позиція по горизонталі */
+  --frame-blur: 3px;
+  --frame-radius: 24px;
+  /* ------------------------------------ */
+
+  /* Основні стилі */
+  position: absolute;
+  width: var(--frame-width);
+  height: var(--frame-height);
+  top: var(--frame-top);
+  left: var(--frame-left);
+  
+  /* Центрування відносно точки top/left */
+  transform: translate(-50%, -50%); 
+  
+  /* Шар, на якому знаходиться рамка */
+  z-index: 2;
+
+  /* Стиль скла (використовуємо ваші змінні) */
+   background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(var(--frame-blur));
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--frame-radius);
+  
+ box-shadow: inset 0 2px 2px 0 rgba(255, 255, 255, 0.2), 
+              inset 0 -2px 5px 0 rgba(0, 0, 0, 0.15);
+
+  /* Плавна анімація при зміні теми */
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+.dark-theme .glass-frame-bg {
+  background: rgba(30, 30, 32, 0.2); /* Тут також можна зменшити непрозорість до 0.15 або 0.1 */
+}
+
+
+/* Спеціальний клас для сторінок з малою кількістю контенту */
+.sticky-footer-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.sticky-footer-layout main {
+  flex-grow: 1;
 }

@@ -1,70 +1,96 @@
-// js/animation.js
 import * as THREE from 'three';
 
-const canvasContainer = document.getElementById('canvas-container');
-if (canvasContainer) {
+// --- НАЛАШТУВАННЯ СЦЕНИ ---
+const container = document.getElementById('scene-container');
+if (container) {
+    // Сцена, камера та рендерер
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, canvasContainer.clientWidth / canvasContainer.clientHeight, 0.1, 1000);
-    camera.position.z = 2.5;
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true // Прозорий фон
+    });
+
+    renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    canvasContainer.appendChild(renderer.domElement);
-    
-    const lightThemeColor = 0x005ae0;
-    const darkThemeColor = 0x0066ff;
+    container.appendChild(renderer.domElement);
 
-    const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
-    const material = new THREE.MeshStandardMaterial({
-        color: document.body.classList.contains('dark-theme') ? darkThemeColor : lightThemeColor,
-        wireframe: true,
-        roughness: 0.1,
-        metalness: 0.5
+    // --- СТВОРЕННЯ ОБ'ЄКТІВ ---
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    // 1. Сітчаста площина (наша "земля")
+    const gridColor = 0x008ac5;
+    const grid = new THREE.GridHelper(40, 40, gridColor, gridColor); // Зробимо сітку трохи більшою
+    grid.material.opacity = 0.2;
+    grid.material.transparent = true;
+    group.add(grid);
+
+
+    // 2. Каркасні силуети будинків
+    const buildingColor = new THREE.Color(0x008ac5);
+    const buildingMaterial = new THREE.MeshBasicMaterial({
+        color: buildingColor,
+        wireframe: true
     });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
     
-    window.addEventListener('themeChanged', (event) => {
-        const newColor = event.detail.theme === 'dark' ? darkThemeColor : lightThemeColor;
-        material.color.set(newColor);
+    // Створюємо 50 "будинків"
+    for (let i = 0; i < 5; i++) {
+        // Випадкові розміри для кожної будівлі
+        const height = Math.random() * 8 + 1; // Висота від 1 до 9
+        const width = Math.random() * 1.5 + 0.5;
+        const depth = Math.random() * 1.5 + 0.5;
+
+        const buildingGeometry = new THREE.BoxGeometry(width, height, depth);
+        const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
+
+        // Випадкова позиція на сітці
+        building.position.x = (Math.random() - 0.5) * 40;
+        building.position.z = (Math.random() - 0.5) * 40;
+        
+        // Ключовий момент: піднімаємо будівлю так, щоб її основа стояла на сітці (y=0)
+        building.position.y = height / 2;
+
+        group.add(building);
+    }
+
+    // --- ОНОВЛЕНЕ ПОЛОЖЕННЯ КАМЕРИ ---
+    // Опускаємо камеру нижче для більш драматичного вигляду
+    camera.position.set(0, 2.5, 9);
+    camera.lookAt(0, 0, 0);
+
+
+    // --- ІНТЕРАКТИВНІСТЬ ТА АНІМАЦІЯ ---
+
+    const mouse = new THREE.Vector2();
+    window.addEventListener('mousemove', (event) => {
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     });
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(5, 5, 5);
-    scene.add(directionalLight);
-
-    let isMouseDown = false;
-    let previousMousePosition = { x: 0, y: 0 };
-    
-    const onMouseDown = (e) => { isMouseDown = true; previousMousePosition.x = e.clientX; previousMousePosition.y = e.clientY; };
-    const onMouseUp = () => isMouseDown = false;
-    const onMouseMove = (e) => {
-        if (!isMouseDown) return;
-        const deltaX = e.clientX - previousMousePosition.x;
-        const deltaY = e.clientY - previousMousePosition.y;
-        cube.rotation.y += deltaX * 0.005;
-        cube.rotation.x += deltaY * 0.005;
-        previousMousePosition.x = e.clientX;
-        previousMousePosition.y = e.clientY;
-    };
-    
-    canvasContainer.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mouseup', onMouseUp);
-    window.addEventListener('mousemove', onMouseMove);
 
     const animate = () => {
-        requestAnimationFrame(animate);
-        if (!isMouseDown) { cube.rotation.x += 0.001; cube.rotation.y += 0.001; }
+        // Будинки не обертаються, тому анімація тут не потрібна
+        
+        // Рух камери за мишкою для ефекту паралаксу
+        const targetX = mouse.x * 1.5;
+        const targetY = mouse.y * 1 + 2.5; // Базова висота камери + зміщення від миші
+
+        camera.position.x += (targetX - camera.position.x) * 0.05;
+        camera.position.y += (targetY - camera.position.y) * 0.05;
+        camera.lookAt(0, 0, 0);
+
         renderer.render(scene, camera);
+        window.requestAnimationFrame(animate);
     };
+
     animate();
 
+    // --- АДАПТИВНІСТЬ ---
     window.addEventListener('resize', () => {
-        camera.aspect = canvasContainer.clientWidth / canvasContainer.clientHeight;
+        camera.aspect = container.clientWidth / container.clientHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
+        renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     });
 }
