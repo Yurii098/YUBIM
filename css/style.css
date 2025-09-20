@@ -331,6 +331,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--color-glass-border); backg
        width: 100%;
     }
 }
+/* ЗАМІНІТЬ ВЕСЬ ЦЕЙ БЛОК у вашому style.css */
 @media (max-width: 768px) {
     .nav-links { 
         display: none; 
@@ -343,10 +344,27 @@ footer { padding: 3rem 0; border-top: 1px solid var(--color-glass-border); backg
         min-height: auto;
     }
     .hero-text-column {
+        /* ✅ КЛЮЧОВЕ ВИПРАВЛЕННЯ: 
+           Примусово центруємо всі дочірні елементи (скляний блок і підзаголовок) 
+           по горизонталі. Це найнадійніший спосіб. */
+        align-items: center; 
         margin-top: 5vh;
     }
-    h1 { 
+    .hero-text-box {
+        /* Встановлюємо ширину, щоб гарантувати відступи з боків */
+        width: 90%;
+        max-width: 500px; /* Обмежимо, щоб на планшетах не було занадто широко */
+    }
+    .hero-subtitle {
+        /* Робимо те саме для підзаголовка */
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+        margin-left: 0; /* Скидаємо відступи з десктопної версії */
+    }
+    h1, .hero-text-box h1 { /* Застосовуємо і до загального h1, і до того, що в склі */
         font-size: 2rem; 
+        text-align: center;
     }
     h2 { 
         font-size: 1.75rem; 
@@ -357,27 +375,18 @@ footer { padding: 3rem 0; border-top: 1px solid var(--color-glass-border); backg
     .header-content {
         padding: 0 1rem;
     }
-
-    /* ✅ Прибираємо картинку та підпис на мобільних */
     .hero-image-container {
         display: none;
     }
-
     .header-controls .button {
-        padding: 0.5rem 1rem;   /* менше внутрішніх відступів */
-        font-size: 0.9rem;      /* трохи менший текст */
-    }
-
-    .header-controls .button {
-        padding: 0.5rem 1rem;   /* компактніша кнопка */
+        padding: 0.5rem 1rem;
         font-size: 0.9rem;
-        display: flex;          /* робимо flex */
-        align-items: center;    /* по вертикалі */
-        justify-content: center;/* по горизонталі */
-        text-align: center;     /* резерв для багаторядкового */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 }
-
 
 /* --- Стилі для кастомного плеєра YouTube --- */
 .video-container {
