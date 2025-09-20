@@ -16,27 +16,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // --- ЛОГІКА ПЕРЕМИКАННЯ ТЕМИ ---
-    const themeSwitcher = document.querySelector('.theme-switcher');
-    
-    const setTheme = (theme) => {
-        if (theme === 'dark') {
-            document.body.classList.add('dark-theme');
-        } else {
-            document.body.classList.remove('dark-theme');
-        }
-        localStorage.setItem('theme', theme);
-        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
-    };
+const themeSwitcher = document.querySelector('.theme-switcher');
 
-    themeSwitcher.addEventListener('click', () => {
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-    });
+const setTheme = (theme) => {
+    // Apply theme class to <html> instead of <body>
+    if (theme === 'dark') {
+        document.documentElement.classList.add('dark-theme');
+    } else {
+        document.documentElement.classList.remove('dark-theme');
+    }
+    localStorage.setItem('theme', theme);
+    window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
+};
 
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
+themeSwitcher.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark-theme');
+    const newTheme = isDark ? 'light' : 'dark';
+    setTheme(newTheme);
+});
 
+// The initial theme is now set by the inline script in the <head>,
+// so the following lines are no longer strictly necessary for preventing the flash,
+// but they ensure consistency if the inline script ever fails.
+const savedTheme = localStorage.getItem('theme') || 'dark'; // Assuming dark is the default
+if (!document.documentElement.classList.contains('dark-theme') && savedTheme === 'dark') {
+    setTheme('dark');
+}
+if (document.documentElement.classList.contains('dark-theme') && savedTheme === 'light') {
+    setTheme('light');
+}
     // --- ЛОГІКА ПЕРЕМИКАННЯ МОВИ ---
     const translations = {
         en: {

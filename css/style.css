@@ -19,7 +19,7 @@
                        radial-gradient(circle at 80% 30%,  rgba(29, 187, 255, 0.8) 0%, transparent 25%);
 }
 
-body.dark-theme {
+html.dark-theme {
     /* Dark Theme */
     --color-accent: #0066ff;
     --color-accent-hover: #3385ff;
