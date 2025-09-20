@@ -1,26 +1,17 @@
-// js/main.js
-
 document.addEventListener('DOMContentLoaded', () => {
-
-
 
     // --- ЛОГІКА ДИНАМІЧНОГО ХЕДЕРА ---
     const header = document.querySelector('header');
     
-    // Перевіряємо, чи хедер взагалі є на сторінці
     if (header) {
         const handleScroll = () => {
-            // Якщо користувач проскролив більше 10px вниз
             if (window.scrollY > 10) {
                 header.classList.add('header-scrolled');
             } else {
                 header.classList.remove('header-scrolled');
             }
         };
-
-        // Викликаємо функцію кожен раз, коли користувач скролить
         window.addEventListener('scroll', handleScroll);
-        // А також викликаємо її один раз при завантаженні сторінки
         handleScroll();
     }
     
@@ -34,20 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('dark-theme');
         }
         localStorage.setItem('theme', theme);
-        // Повідомляємо анімацію про зміну теми
         window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
     };
 
     themeSwitcher.addEventListener('click', () => {
-        const currentTheme = localStorage.getItem('theme') || 'light';
+        const currentTheme = localStorage.getItem('theme') || 'dark';
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         setTheme(newTheme);
     });
 
-    // Встановлюємо тему при завантаженні (світла за замовчуванням)
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = localStorage.getItem('theme') || 'dark';
     setTheme(savedTheme);
-
 
     // --- ЛОГІКА ПЕРЕМИКАННЯ МОВИ ---
     const translations = {
@@ -56,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nav_about: "About",
             nav_courses: "Courses",
             btn_get_started: "Get Started",
-            hero_h1: "Engineering the Future.<br>Elevating Your Projects.",
+            hero_h1: '<span class="h1-line1">Engineering the Future.</span><br><span class="h1-line2">Elevating Your Projects.</span>',
             hero_subtitle: "A deep dive into BIM technologies. Bespoke courses and solutions for professionals who strive for excellence.",
             about_h2: "Mission & Expertise",
             about_subtitle: "My goal is to provide engineers with advanced knowledge and tools to execute the most ambitious projects. Combining the academic foundation of the University of Glasgow with practical experience, I create training programs that bridge the gaps in classical education.",
@@ -82,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nav_about: "Про автора",
             nav_courses: "Курси",
             btn_get_started: "Почати навчання",
-            hero_h1: "Інженерія майбутнього.<br>Ваші проєкти на новому рівні.",
+            hero_h1: '<span class="h1-line1">Інженерія майбутнього.</span><br><span class="h1-line2">Ваші проєкти на новому рівні.</span>',
             hero_subtitle: "Глибоке занурення у BIM-технології. Авторські курси та рішення для фахівців, що прагнуть досконалості.",
             about_h2: "Місія та експертиза",
             about_subtitle: "Моя мета — надати інженерам передові знання та інструменти для реалізації найамбітніших проєктів. Поєднуючи академічну базу Університету Глазго та практичний досвід, я створюю навчальні програми, що закривають прогалини класичної освіти.",
@@ -126,7 +114,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Встановлюємо мову при завантаженні (українська за замовчуванням)
     const savedLang = localStorage.getItem('language') || 'uk';
     setLanguage(savedLang);
+
+    // --- ЛОГІКА КАСТОМНОГО ПЛЕЄРА YOUTUBE ---
+    const playerContainer = document.getElementById('youtube-player');
+
+    if (playerContainer) {
+        playerContainer.addEventListener('click', () => {
+            const videoId = 'rbWwjsW_aoM';
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            iframe.title = 'YouTube video player';
+            iframe.frameBorder = '0';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            playerContainer.innerHTML = '';
+            playerContainer.appendChild(iframe);
+            playerContainer.removeEventListener('click', this);
+        });
+    }
 });
